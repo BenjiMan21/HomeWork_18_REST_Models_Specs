@@ -34,6 +34,7 @@ public class RestApiTests extends TestBase {
     void checkThePageWithAllLogsTest() {
         step ("Проверка page:1 с логами", ()->{
         given(listAllLogsRequestSpec)
+
                 .when()
                 .get()
 
