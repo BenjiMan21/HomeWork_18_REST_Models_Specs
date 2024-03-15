@@ -23,7 +23,7 @@ public class RestApiTests extends TestBase {
             given(listCheckPageRequestSpec)
 
                     .when()
-                    .get()
+                    .get("/unknown")
 
                     .then()
                     .body("page", is(1));
@@ -36,7 +36,7 @@ public class RestApiTests extends TestBase {
         given(listAllLogsRequestSpec)
 
                 .when()
-                .get()
+                .get("/unknown")
 
                 .then()
                 .log().all()
@@ -50,7 +50,7 @@ public class RestApiTests extends TestBase {
         given(listRequestSpec)
 
                 .when()
-                .get()
+                .get("/unknown")
 
                 .then()
                 .log().status()
@@ -65,7 +65,7 @@ public class RestApiTests extends TestBase {
         given(listRequestSpec)
 
                 .when()
-                .get()
+                .get("/unknown")
 
                 .then()
                 .spec(listResponseSpec)
@@ -79,7 +79,7 @@ public class RestApiTests extends TestBase {
         given(listRequestSpec)
 
                 .when()
-                .get()
+                .get("/unknown")
 
                 .then()
                 .spec(listResponseSpec)
@@ -94,14 +94,14 @@ public class RestApiTests extends TestBase {
             return given(listRequestSpec)
 
                 .when()
-                .get()
+                .get("/unknown")
 
                 .then()
                 .spec(listResponseSpec)
                 .body(matchesJsonSchemaInClasspath("schemas/homework-schema.json"))
                 .extract().response();
         });
-        step ("Ответ", ()->
+        step ("Проверка ответа", ()->
         assertThat(statusResponse.path("page"), is(1)));
     }
 
@@ -111,14 +111,14 @@ public class RestApiTests extends TestBase {
             return given(listRequestSpec)
 
                 .when()
-                .get()
+                .get("/unknown")
 
                 .then()
                 .spec(listResponseSpec)
                 .body(matchesJsonSchemaInClasspath("schemas/homework-schema.json"))
                 .extract().response().asString();
         });
-        step ("Ответ", ()->{
+        step ("Проверка ответа", ()->{
         assertThat(response)
                 .contains("\"page\":1")
                 .contains("\"total\":12")
@@ -132,14 +132,14 @@ public class RestApiTests extends TestBase {
         return given(listRequestSpec)
 
                 .when()
-                .get()
+                .get("/unknown")
 
                 .then()
                 .spec(listResponseSpec)
                 .body(matchesJsonSchemaInClasspath("schemas/homework-schema.json"))
                 .extract().response().asString();
         });
-        step ("Ответ", ()->{
+        step ("Проверка ответа", ()->{
         assertThat(response)
                 .contains("\"name\":\"cerulean\"")
                 .contains("\"pantone_value\":\"15-4020\"");
@@ -157,14 +157,14 @@ public class RestApiTests extends TestBase {
                 .body(authData)
 
                 .when()
-                .post()
+                .post("/login")
 
                 .then()
                 .spec(loginResponseSpec)
                 .body(matchesJsonSchemaInClasspath("schemas/homework-login-schema.json"))
                         .extract().as(LoginMissingPasswordModel.class);
         });
-        step ("Ответ", ()->
+        step ("Проверка ответа", ()->
                 assertEquals("Missing password", response.getError()));
     }
 }

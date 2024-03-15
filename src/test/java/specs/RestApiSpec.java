@@ -13,21 +13,18 @@ import static io.restassured.http.ContentType.JSON;
 public class RestApiSpec {
 
     public static RequestSpecification listCheckPageRequestSpec = with()
-            .filter(withCustomTemplates())
-            .basePath("/api/unknown");
+            .filter(withCustomTemplates());
 
     public static RequestSpecification listAllLogsRequestSpec = with()
             .filter(withCustomTemplates())
-            .log().all()
-            .basePath("/api/unknown");
+            .log().all();
 
     public static RequestSpecification listRequestSpec = with()
             .filter(withCustomTemplates())
             .log().uri()
             .log().method()
             .log().body()
-            .log().headers()
-            .basePath("/api/unknown");
+            .log().headers();
 
     public static ResponseSpecification listResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(200)
@@ -41,8 +38,7 @@ public class RestApiSpec {
             .log().method()
             .log().body()
             .log().headers()
-            .contentType(JSON)
-            .basePath("/api/login");
+            .contentType(JSON);
 
     public static ResponseSpecification loginResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(400)
